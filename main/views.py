@@ -1,10 +1,41 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from main.forms import MoodEntryForm
+from main.models import MoodEntry
+from django.http import HttpResponse
+from django.core import serializers
+
+def show_xml(request):
+    data = MoodEntry.objects.all()
+
+def show_xml(request):
+    data = MoodEntry.objects.all()
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+def show_json(request):
+    data = MoodEntry.objects.all()
+
+def show_json(request):
+    data = MoodEntry.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def show_main(request):
+    mood_entries = MoodEntry.objects.all()
+
     context = {
-        'npm' : '2306123456',
-        'name': 'Pak Bepe',
-        'class': 'PBP E'
+        'name': 'Heinrich',
+        'class': 'PBP KKI',
+        'npm': '2306256356',
+        'mood_entries': mood_entries
     }
 
     return render(request, "main.html", context)
+
+def create_mood_entry(request):
+    form = MoodEntryForm(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return redirect('main:show_main')
+
+    context = {'form': form}
+    return render(request, "create_mood_entry.html", context)
