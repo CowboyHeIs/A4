@@ -30,6 +30,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'http://heinrich-edric-m.pbp.cs.ui.ac.id'
     'https://heinrich-edric-m.pbp.cs.ui.ac.id'
+    'heinrich-edric-m.pbp.cs.ui.ac.id'
 ]
 
 
