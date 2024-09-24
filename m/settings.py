@@ -28,7 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'heinrich-edric-m.pbp.cs.ui.ac.id'
+    'heinrich-edric-a4.pbp.cs.ui.ac.id'
 ]
 
 
@@ -130,6 +130,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost",
     "http://127.0.0.1",
-    'http://heinrich-edric-m.pbp.cs.ui.ac.id',
-    'https://heinrich-edric-m.pbp.cs.ui.ac.id'
+    'http://heinrich-edric-a4.pbp.cs.ui.ac.id',
+    'https://heinrich-edric-a4.pbp.cs.ui.ac.id'
 ]
