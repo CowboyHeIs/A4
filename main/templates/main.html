@@ -11,7 +11,7 @@
  <h5>Class:</h5>
  <p>{{ class }}</p>
  {% if not mood_entries %}
-<p>There are no mood data in mental health tracker.</p>
+<p>There are no product data in here.</p>
 {% else %}
 <table>
   <tr>
@@ -37,7 +37,7 @@
 <br />
 
 <a href="{% url 'main:create_mood_entry' %}">
-  <button>Add New Mood Entry</button>
+  <button>Add New Products</button>
 </a>
 <a href="{% url 'main:logout' %}">
   <button>Logout</button>
