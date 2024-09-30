@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from main.forms import MoodEntryForm
 from main.models import MoodEntry
 from django.http import HttpResponse, HttpResponseRedirect
@@ -10,6 +10,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 import datetime
 
+#######################################
+'SHOW'
+#######################################
 def show_xml(request):
     data = MoodEntry.objects.all()
 
@@ -37,7 +40,11 @@ def show_main(request):
     }
 
     return render(request, "main.html", context)
+#######################################
 
+#######################################
+'PRODUCTS'
+#######################################
 def create_mood_entry(request):
     form = MoodEntryForm(request.POST or None)
 
@@ -50,6 +57,25 @@ def create_mood_entry(request):
     context = {'form': form}
     return render(request, "create_mood_entry.html", context)
 
+def edit_mood(request, id):
+    # Get mood entry based on id
+    mood = MoodEntry.objects.get(pk = id)
+
+    # Set mood entry as an instance of the form
+    form = MoodEntryForm(request.POST or None, instance=mood)
+
+    if form.is_valid() and request.method == "POST":
+        # Save form and return to home page
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_mood.html", context)
+#######################################
+
+#######################################
+'USER'
+#######################################
 def register(request):
     form = UserCreationForm()
 
@@ -83,3 +109,4 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
+#######################################

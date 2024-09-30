@@ -19,7 +19,7 @@
     <th>Products</th>
     <th>Time</th>
     <th>Description</th>
-    <th>Mood Intensity</th>
+    <th>Price</th>
   </tr>
 
   {% comment %} This is how to display mood data
@@ -30,6 +30,13 @@
     <td>{{mood_entry.time}}</td>
     <td>{{mood_entry.feelings}}</td>
     <td>{{mood_entry.mood_intensity}}</td>
+    <td>
+      <a href="{% url 'main:edit_mood' mood_entry.pk %}">
+        <button>
+          Edit
+        </button>
+      </a>
+    </td>
   </tr>
   {% endfor %}
 </table>
