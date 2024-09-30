@@ -71,6 +71,14 @@ def edit_mood(request, id):
 
     context = {'form': form}
     return render(request, "edit_mood.html", context)
+
+def delete_mood(request, id):
+    # Get mood based on id
+    mood = MoodEntry.objects.get(pk = id)
+    # Delete mood
+    mood.delete()
+    # Return to home page
+    return HttpResponseRedirect(reverse('main:show_main'))
 #######################################
 
 #######################################
