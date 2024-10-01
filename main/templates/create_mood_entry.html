@@ -1,18 +1,49 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Create Mood</title>
+{% endblock meta %}
+
 {% block content %}
-<h1>Add New Mood Entry</h1>
+<div class="min-h-screen flex items-center justify-center bg-black py-12 px-4 sm:px-6 lg:px-8">
+    <div class="container mx-auto max-w-xl w-full space-y-8 form-style"> <!-- Form container -->
+        <h1 class="text-3xl font-extrabold text-orange-500 text-center mb-8">Create Mood Entry</h1> <!-- Main heading -->
 
-<form method="POST">
-  {% csrf_token %}
-  <table>
-    {{ form.as_table }}
-    <tr>
-      <td></td>
-      <td>
-        <input type="submit" value="Add Mood Entry" />
-      </td>
-    </tr>
-  </table>
-</form>
-
-{% endblock %}
+        <div class="bg-[#1f0d29] shadow-md rounded-lg p-6"> <!-- Darker deep purple form card -->
+            <form method="POST" class="space-y-6">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="flex flex-col"> <!-- Field container -->
+                    <label for="{{ field.id_for_label }}" class="mb-2 font-semibold text-orange-500">
+                        {{ field.label }}
+                    </label>
+                    <div class="relative"> <!-- Input field -->
+                        {{ field }}
+                        {% if field.errors %}
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <!-- Error icon -->
+                            <svg class="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% if field.help_text %}
+                    <p class="mt-1 text-sm text-orange-500">{{ field.help_text }}</p> <!-- Help text -->
+                    {% endif %}
+                    {% for error in field.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ error }}</p> <!-- Error messages -->
+                    {% endfor %}
+                </div>
+                {% endfor %}
+                <div class="flex justify-center mt-6"> <!-- Submit button -->
+                    <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#3a2b4e] hover:bg-[#1f0d29] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1f0d29]"> <!-- Brighter button -->
+                        Create Mood Entry
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
