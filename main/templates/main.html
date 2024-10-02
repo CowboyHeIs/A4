@@ -25,6 +25,7 @@
   <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
     <img src="{% static 'image/very-sad.png' %}" alt="Sad face" class="w-32 h-32 mb-4"/>
     <p class="text-center text-gray-600 mt-4">There is no products added in here.</p>
+    <a href="{% url 'main:create_mood_entry' %}" class="block text-center bg-[#1f0d29] hover:bg-[#3a2b4e] text-orange-300 py-2 px-4 rounded transition duration-300">Add Product</a>
   </div>
   {% else %}
   <div class="columns-2 sm:columns-3 lg:columns-4 gap-6 space-y-6 w-full">
