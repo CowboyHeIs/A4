@@ -1,15 +1,14 @@
-<nav class="bg-[#301934] shadow-lg fixed top-0 left-0 z-40 w-screen">
+<nav class="bg-[#1f0d29] shadow-lg fixed top-0 left-0 z-40 w-screen">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <div class="flex items-center">
-        <h1 class="text-2xl font-bold text-center text-white">Mental Health Tracker</h1>
+        <h1 class="text-2xl font-bold text-center text-orange-300">Bhatit</h1>
       </div>
       <div class="hidden md:flex items-center">
         {% if user.is_authenticated %}
-          <span class="text-gray-300 mr-4">Welcome, {{ user.username }}</span>
-          <a href="{% url 'main:logout' %}" class="text-center bg-[#3a2b4e] hover:bg-[#3a2b4e] text-white font-bold py-2 px-4 rounded transition duration-300">
-            Logout
-          </a>
+          <span class="text-orange-300">Welcome, {{ user.username }}  |</span>
+          <a href="{% url 'main:create_mood_entry' %}" class="text-center bg-[#1f0d29] hover:bg-[#3a2b4e] text-orange-300 py-2 px-4 rounded transition duration-300">Add Product</a>
+          <a href="{% url 'main:logout' %}" class="text-center bg-[#1f0d29] hover:bg-[#3a2b4e] text-red-400 font-bold py-2 px-4 rounded transition duration-300">Logout</a>
         {% else %}
           <a href="{% url 'main:login' %}" class="text-center bg-gradient-to-r from-indigo-600 to-teal-500 hover:bg-gradient-to-r hover:from-indigo-700 hover:to-teal-600 text-white font-bold py-2 px-4 rounded transition duration-300 mr-2">
             Login
@@ -28,14 +27,14 @@
       </div>
     </div>
   </div>
+
   <!-- Mobile menu -->
   <div class="mobile-menu hidden md:hidden px-4 w-full md:max-w-full">
     <div class="pt-2 pb-3 space-y-1 mx-auto">
       {% if user.is_authenticated %}
-        <span class="block text-gray-300 px-3 py-2">Welcome, {{ user.username }}</span>
-        <a href="{% url 'main:logout' %}" class="block text-center bg-[#3a2b4e] hover:bg-[#3a2b4e] text-white font-bold py-2 px-4 rounded transition duration-300">
-          Logout
-        </a>
+        <span class="block text-orange-300 px-3 py-2">Welcome, {{ user.username }}</span>
+        <a href="{% url 'main:create_mood_entry' %}" class="block text-center bg-[#1f0d29] hover:bg-[#3a2b4e] text-orange-300 py-2 px-4 rounded transition duration-300">Add Product</a>
+        <a href="{% url 'main:logout' %}" class="block text-center bg-[#1f0d29] hover:bg-[#3a2b4e] text-red-400 font-bold py-2 px-4 rounded transition duration-300">Logout</a>
       {% else %}
         <a href="{% url 'main:login' %}" class="block text-center bg-gradient-to-r from-indigo-600 to-teal-500 hover:bg-gradient-to-r hover:from-indigo-700 hover:to-teal-600 text-white font-bold py-2 px-4 rounded transition duration-300 mb-2">
           Login

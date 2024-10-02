@@ -10,19 +10,17 @@
 
 <div class="flex flex-col min-h-screen bg-[#000000]"> <!-- Black background -->
     <div class="container mx-auto px-4 py-8 mt-16 max-w-xl">
-        <h1 class="text-3xl font-bold text-center mb-8 text-orange-500">Edit Mood Entry</h1> <!-- Orange title -->
-
-        <div class="bg-[#1a0c20] rounded-lg p-6 form-style"> <!-- Dark deep purple -->
-
+        <h1 class="text-3xl font-bold text-center mb-8 text-orange-300">Edit Mood Entry</h1>
+        <div class="bg-[#1a0c20] rounded-lg p-6 form-style">
             <form method="POST" class="space-y-6">
                 {% csrf_token %}
-                
+
                 <!-- Loop through form fields -->
-                {% for field in form %}
-                
+                {% for field in form %}                
                 <div class="flex flex-col">
+
                     <!-- Field label -->
-                    <label for="{{ field.id_for_label }}" class="mb-2 font-semibold text-orange-500"> <!-- Orange label -->
+                    <label for="{{ field.id_for_label }}" class="mb-2 font-semibold text-orange-300">
                         {{ field.label }}
                     </label>
                     
@@ -47,11 +45,10 @@
                 
                 <!-- Submit button -->
                 <div class="flex justify-center mt-6">
-                    <button type="submit" class="bg-[#1a0c20] text-orange-500 font-semibold px-6 py-3 rounded-lg hover:bg-[#3a2b4e] transition duration-300 ease-in-out w-full"> <!-- Dark deep purple button with brighter hover -->
+                    <button type="submit" class="bg-[#1a0c20] text-orange-300 font-semibold px-6 py-3 rounded-lg hover:bg-[#3a2b4e] transition duration-300 ease-in-out w-full">
                         Edit Mood Entry
                     </button>
                 </div>
-
             </form>
         </div>
     </div>
