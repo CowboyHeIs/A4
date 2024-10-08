@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Add Product</title>
+{% endblock meta %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-black py-12 px-4 sm:px-6 lg:px-8">
+    <div class="container mx-auto max-w-xl w-full space-y-8 form-style">
+        <h1 class="py-4 px-4 bg-[#1f0d29] rounded-lg text-3xl font-extrabold text-orange-300 text-center mb-8">Add Product</h1>
+
+        <div class="bg-[#1f0d29] shadow-md rounded-lg p-6">
+            <form method="POST" class="space-y-6" id="addProductForm">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="flex flex-col"> 
+
+                    <!-- Field container -->
+                    <label for="{{ field.id_for_label }}" class="mb-2 font-semibold text-orange-300">
+                        {{ field.label }}
+                    </label>
+
+                    <!-- Input -->
+                    <div class="relative">
+                        {{ field }}
+                        {% if field.errors %}
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <!-- Error icon -->
+                            <svg class="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% if field.help_text %}
+                    <p class="mt-1 text-sm text-orange-300">{{ field.help_text }}</p> <!-- Help text -->
+                    {% endif %}
+                    {% for error in field.errors %}
+
+                    <!-- Error -->
+                    <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                    {% endfor %}
+
+                </div>
+                {% endfor %}
+
+                <!-- Submit button -->
+                <div class="flex justify-center mt-6"> 
+                    <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-orange-300 bg-[#1f0d29] hover:bg-[#3a2b4e] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3a2b4e]">Add Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -36,4 +36,20 @@
   {% endif %}
 </div>
 
+<!-- Product Cards Loop -->
+<div class="product-cards">
+  {% for mood_entry in mood_entries %}
+  <div class="relative break-inside-avoid">
+    <!-- Product card HTML -->
+  </div>
+  {% endfor %}
+</div>
+
+<script>
+  async function getMoodEntries(){
+      return fetch("{% url 'main:show_json' %}").then((res) => res.json())
+  }
+</script>
+
+
 {% endblock content %}

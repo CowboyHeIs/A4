@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from main.forms import MoodEntryForm
 from main.models import MoodEntry
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.core import serializers
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -27,16 +27,20 @@ def show_json(request):
     data = MoodEntry.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
+
 @login_required(login_url='/login')
 def show_main(request):
-    mood_entries = MoodEntry.objects.filter(user=request.user)
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        mood_entries = MoodEntry.objects.filter(user=request.user)
+        mood_entries_data = serializers.serialize('json', mood_entries)
+        return JsonResponse(mood_entries_data, safe=False)
 
+    mood_entries = MoodEntry.objects.filter(user=request.user)
     context = {
         'name': request.user.username,
         'mood_entries': mood_entries,
         'last_login': request.COOKIES.get('last_login')
     }
-
     return render(request, "main.html", context)
 #######################################
 
@@ -77,6 +81,20 @@ def delete_mood(request, id):
     mood.delete()
     # Return to home page
     return HttpResponseRedirect(reverse('main:show_main'))
+
+@login_required(login_url='/login')
+def create_mood_entry_ajax(request):
+    if request.method == 'POST' and request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        form = MoodEntryForm(request.POST)
+        if form.is_valid():
+            mood_entry = form.save(commit=False)
+            mood_entry.user = request.user
+            mood_entry.save()
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'errors': form.errors})
+    return JsonResponse({'success': False, 'error': 'Invalid request'})
+
 #######################################
 
 #######################################
